@@ -1,15 +1,14 @@
 
-import { Paper } from '@mui/material';
 import { HomePage } from './pages/home-page';
-import { AppHeaderBar } from './shared/components';
+import { LoginPage } from './pages/login-page';
+import { Routes, Route } from 'react-router-dom';
+import { AppRoutes } from './shared/routing';
+
 
 function App() {
 
   return (
-   <Paper>
-      <AppHeaderBar />
-      <HomePage />
-   </Paper>
+    <AppRoutes />
   );
 }
 

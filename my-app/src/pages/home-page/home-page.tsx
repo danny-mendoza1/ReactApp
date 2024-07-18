@@ -1,8 +1,11 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import { PLACE_HOLDER_TEXT } from "../../shared/constants";
+import { AppHeaderBar } from "../../shared/components";
 
 export function HomePage() {
   return (
+    <Paper>
+      <AppHeaderBar />
     <Grid container sx={{ display: "flex", justifyContent: "center" }}>
       <Grid item xs={12} lg={6}>
         <img src="/cleaning-stock-photo.jpg" alt="cleaning" width='100%'/>
@@ -15,5 +18,7 @@ export function HomePage() {
         </Box>
       </Grid>
     </Grid>
+    </Paper>
+
   );
 }
