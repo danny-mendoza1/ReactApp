@@ -1,9 +1,32 @@
-import { Container, CssBaseline, Box, Link, Typography, Grid, TextField, FormControlLabel, Checkbox, Button } from "@mui/material";
+import { Container, CssBaseline, Box, Link, Typography, Grid, TextField, FormControlLabel, Checkbox, Button, FormControl } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+type SignupForm = {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+}
 
 export function SignUpPage(){
+    const { register, handleSubmit } = useForm<SignupForm>();
+    const onSubmit = handleSubmit((data) => fetch('http://localhost:3001/signup', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .catch((error) => {
+        console.error('Error: ', error)
+    })
+)
+    const navigate = useNavigate();
     return (
         <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        <FormControl onSubmit={onSubmit}>
         <Box
           sx={{
             marginTop: 8,
@@ -18,7 +41,7 @@ export function SignUpPage(){
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <TextField {...register('firstName')}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -29,7 +52,7 @@ export function SignUpPage(){
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
+                <TextField {...register('lastName')}
                   required
                   fullWidth
                   id="lastName"
@@ -39,7 +62,7 @@ export function SignUpPage(){
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <TextField {...register('email')}
                   required
                   fullWidth
                   id="email"
@@ -49,7 +72,7 @@ export function SignUpPage(){
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+                <TextField {...register('password')}
                   required
                   fullWidth
                   name="password"
@@ -83,6 +106,7 @@ export function SignUpPage(){
             </Grid>
           </Box>
         </Box>
+        </FormControl>
       </Container>
     )
 }
