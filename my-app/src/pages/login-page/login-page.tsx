@@ -10,14 +10,13 @@ type LoginForm = {
 }
 
 export function LoginPage() {
-    const { register, handleSubmit } = useForm<LoginForm>();
-    const onSubmit = handleSubmit((data) => console.log("we did it", data))
+    const { register } = useForm<LoginForm>();
     const navigate = useNavigate();
 
 
     return (
         <Container component="main" maxWidth="xs">
-            <FormControl onSubmit={onSubmit}>
+            <FormControl >
                 <CssBaseline />
                 <Box
                     sx={{
